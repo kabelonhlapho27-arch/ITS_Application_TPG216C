@@ -1,50 +1,23 @@
 class Course
 {
-  String courseCode;
-  String courseName;
-  int durationInWeeks = 0;
-  String level;
+  // Private fields
+  String _courseCode;
+  String _courseName;
+  int _durationInWeeks;
+  String _level;
 
-  //Constructor
-  Course(String code, String name, int duration, String courseLevel)
-  {
-    courseCode = code;
-    courseName = name;
-    durationInWeeks = duration;
-    level = courseLevel;
-  }
+  // Constructor that accepts all four fields
+  Course(this._courseCode, this._courseName, this._durationInWeeks, this._level);
 
-  //Getters methods
-  String get courseCode{
-    return courseCode;
-  }
+  // Getters
+  String get courseCode => _courseCode;
+  String get courseName => _courseName;
+  int get durationInWeeks => _durationInWeeks;
+  String get level => _level;
 
-  String get courseName{
-    return courseName;
-  }
-
-  int get durationInWeeks{
-    return durationInWeeks;
-  }
-
-  String get level{
-    return level;
-  }
-
- //Setters
-  set courseCode(String code){
-    courseCode = code;
-  }
-
-  set courseName(String name){
-    courseName = name;
-  }
-
-  set durationInWeeks(int duration){
-    durationInWeeks = duration;
-  }
-
-  set level(String courseLevel){
-    level = courseLevel;
-  }
+  // Setters
+  set courseCode(String value) => _courseCode = value;
+  set courseName(String value) => _courseName = value;
+  set durationInWeeks(int value) => _durationInWeeks = value;
+  set level(String value) => _level = value;
 }
