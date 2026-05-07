@@ -10,7 +10,7 @@ import 'fileManager.dart';//save/load functions
 void main(){
   
   int input = 0;
-  if(input != 11)
+  while(input != 11){
   print('===================================');
   print("STUDENT COURSE REGISTRATION SYSTEM");
   print('===================================');
@@ -68,12 +68,10 @@ void main(){
          break;
     }
 
+  }
+}
 
-}
-addStudent(){
-  print("Mluja");
-}
-displayStudent(){}
+
 addCourse(){}
 displayCourse(){}
 registerStudentForCourse(){}
