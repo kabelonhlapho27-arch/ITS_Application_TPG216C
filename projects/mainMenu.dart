@@ -30,10 +30,10 @@ void main(){
    input=int.parse(stdin.readLineSync()!);
     switch (input){
       case 1:
-          addStudent();//implemented in student.dart
+          Student('','','',0).addStudent();//implemented in student.dart
             break;
       case 2:
-          displayStudent();//implemented in student.dart
+          Student('','','',0).displayStudent();//implemented in student.dart
             break;
       case 3:
           addCourse();//implemented in course.dart
