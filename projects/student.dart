@@ -18,7 +18,7 @@ class Student extends Person
     this._id=ID;
   }
 
-  static List<Student> student=[];
+  static List<Student> students=[];
   
   void addStudent()
   {
