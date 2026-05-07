@@ -25,7 +25,7 @@ class Student extends Person
     String choice="y";
 
     //Inputs
-    while(choice.toloweCase()=="y"){
+    while(choice.tolowerCase()=="y"){
       print("Enter a student ID:");
       _id = stdin.readLineSync()!.trim();
       print ("Enter first name:");
