@@ -29,12 +29,12 @@ void main(){
   
    input=int.parse(stdin.readLineSync()!);
     switch (input){
-      case 1:
-          Student('','','',0).addStudent();//implemented in student.dart
-            break;
-      case 2:
-          Student('','','',0).displayStudent();//implemented in student.dart
-            break;
+     case 1:
+          addStudent();
+          break;
+        case 2:
+          displayStudent();
+          break;
       case 3:
           addCourse();//implemented in course.dart
             break;
@@ -71,8 +71,61 @@ void main(){
   }
 }
 
-addStudent(){}
-displayStudent(){}
+void addStudent() {
+  //Inputs
+  String choice = "y";
+
+  while (choice.toLowerCase() == "y") {
+    print("Enter a student ID:");
+    String studentID = stdin.readLineSync()!.trim();
+
+    print("Enter first name:");
+    String firstName = stdin.readLineSync()!.trim();
+
+    print("Enter last name:");
+    String lastName = stdin.readLineSync()!.trim();
+
+    print("Enter a cellphone:");
+    String cellphone = stdin.readLineSync()!.trim();
+
+    // Validation(Changed AND to OR so each of the user input is checked for being empty.)
+    if (studentID.isEmpty ||
+        firstName.isEmpty ||
+        lastName.isEmpty ||
+        cellphone.isEmpty) {
+      print("All inputs required. Please try again.");
+      //removed the call of studentd add to avoid an infinte loop as continue will already restart the loop.
+      continue;
+    }
+
+    // Check for duplicates
+    bool idExists = students.any((s) => s.studentID == studentID);
+    if (idExists) {
+      print("Student ID already exists. Please enter a unique ID.");
+      continue;
+    }
+
+    // Add to list
+    students.add(Student(studentID, firstName, lastName, cellphone));
+    print("Student added successfully.");
+
+    print("Do you want to add another student? (y/n)");
+    choice = stdin.readLineSync()!.trim();
+  }
+displayStudent() {
+  if (students.isEmpty) {
+    print("No student found");
+  } else {
+    print("STUDENT LIST");
+    print("------------------------------------------");
+    print("ID          Name              Cellphone");
+    for (var s in students) {
+      print(
+        "${s.studentID}      ${s.firstName}${s.lastName}                     ${s.cellphone}",
+      );
+    }
+  }
+}
 //find student by ID helper function to avoid code duplication in registerStudentForCourse and viewRegistrationsByStudent
 Student? findStudentById(String studentId) {
   try {
@@ -132,7 +185,23 @@ void registerStudentForCourse() {
   String regID = 'REG${registrations.length + 1}';
   registrations.add(Registration(regID, student, course, regDate));
 }
-viewAllRegistrations(){}
+void viewAllRegistrations() {
+  if (registrations.isEmpty) {
+    print('No registrations found.');
+    return;
+  }
+
+  print('\nREGISTRATION LIST');
+  print('Reg ID\tStudent ID\tStudent Name\tCourse Code\tCourse Name');
+  print(
+    '-------------------------------------------------------------------------',
+  );
+  for (var r in registrations) {
+    print(
+      '${r.regID}\t${r.student.studentID}\t\t${r.student.firstName} ${r.student.lastName}\t${r.course.courseCode}\t\t${r.course.courseName}',
+    );
+  }
+}
 viewRegistrationsByStudent(){}
 viewRegistrationsByCourse(){}
 saveAllData(){}
