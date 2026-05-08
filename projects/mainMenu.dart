@@ -91,7 +91,47 @@ Course? findCourseByCode(String courseCode) {
     return null;
   }
 }
-registerStudentForCourse(){}
+void registerStudentForCourse() {
+  print('\n=========================================');
+  print('REGISTER STUDENT FOR COURSE');
+  print('=========================================');
+  stdout.write('Enter Student ID: ');
+
+  String studentID = stdin.readLineSync()?.trim() ?? '';
+
+  Student? student = findStudentById(studentID);
+
+  // Validate if the student actually exists before moving on
+  if (student == null) {
+    print('Error: Student not found. Please try again.');
+    return; // Stop the function here so it doesn't crash later
+  }
+
+  stdout.write('Enter Course Code: ');
+  String? courseCode = stdin.readLineSync()?.trim() ?? '';
+
+  Course? course = findCourseByCode(courseCode);
+  if (course == null) {
+    print('Error: Course does not exist.');
+    return;
+  }
+  stdout.write('Enter registration date (YYYY-MM-DD): ');
+  String? dateStr = stdin.readLineSync()?.trim();
+  DateTime? regDate;
+  try {
+    regDate = DateTime.parse(dateStr!);
+    if (regDate.isAfter(DateTime.now())) {
+      print('Error: Registration date cannot be in the future.');
+      return;
+    }
+  } catch (e) {
+    print('Invalid date format. Use YYYY-MM-DD.');
+    return;
+  }
+
+  String regID = 'REG${registrations.length + 1}';
+  registrations.add(Registration(regID, student, course, regDate));
+}
 viewAllRegistrations(){}
 viewRegistrationsByStudent(){}
 viewRegistrationsByCourse(){}
