@@ -2,31 +2,33 @@ abstract class Person {
   //Fields
   String _firstName;
   String _lastName;
-  int  _cellphone;
+  String _cellphone;
 
-  Person(this._firstName, this._lastName,this._cellphone); //Constructor
-   
-   //Getters
-   String get firstName{
+  Person(this._firstName, this._lastName, this._cellphone); //Constructor
+
+  //Getters
+  String get firstName {
     return _firstName;
-   }
-   String get lastName{
+  }
+
+  String get lastName {
     return _lastName;
-   }
-   int get cellphone{
+  }
+
+  String get cellphone {
     return _cellphone;
-   }
+  }
 
-   //setters
-    set firstName(String firstName){
+  //setters
+  set firstName(String firstName) {
     this._firstName = firstName;
-    }
-    set lastName(String lastName){
-      this._lastName = lastName;
-    }
-    set cellphone(int cellphone){
-      this._cellphone = cellphone;
-    }
+  }
 
-  
+  set lastName(String lastName) {
+    this._lastName = lastName;
+  }
+
+  set cellphone(String cellphone) {
+    this._cellphone = cellphone;
+  }
 }
