@@ -156,7 +156,48 @@ Student? findStudentById(String studentId) {
   }
 }
 
-addCourse() {}
+addCourse() {
+  String choice = 'y';
+
+  while (choice.toLowerCase() == 'y') {
+    print("Enter course code: ");
+    String courseCode = stdin.readLineSync()!;
+
+    print("Enter course name: ");
+    String courseName = stdin.readLineSync()!;
+
+    print("Enter duration in weeks: ");
+    int durationInWeeks = int.parse(stdin.readLineSync()!);
+
+    print("Enter course level: ");
+    String level = stdin.readLineSync()!.trim();
+
+    // Validation
+    if (courseCode.isEmpty ||
+        courseName.isEmpty ||
+        durationInWeeks < 0 ||
+        level.isEmpty) {
+    
+        print("All inputs required. Please try again.");
+        continue;
+    }
+
+    // Create unique courseCode
+    bool courseCodeExists = courses.any((nr) => nr.courseCode == courseCode);
+    if(courseCodeExists) {
+      print("Course code already exists. Please enter unique course code.");
+      continue;
+    }
+
+    // Add to list
+    courses.add(Course(courseCode, courseName, durationInWeeks, level));
+    print("Course added succssfully.");
+
+    print("Do you want to add another course? (y/n)");
+    choice = stdin.readLineSync()!.trim();
+
+  }
+}
 displayCourse() {}
 //find course by code helper function to avoid code duplication in registerStudentForCourse and viewRegistrationsByCourse
 Course? findCourseByCode(String courseCode) {
