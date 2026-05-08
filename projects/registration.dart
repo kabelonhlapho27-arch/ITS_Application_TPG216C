@@ -3,22 +3,22 @@ import 'student.dart';
 
 class Registration {
   String _regID;
-  Student _studentID;
-  Course _courseCode;
+  Student _student;
+  Course _course;
   DateTime _regDate;
 
-  Registration(this._regID, this._studentID, this._courseCode, this._regDate);
+  Registration(this._regID, this._student, this._course, this._regDate);
 
   String get regID {
     return _regID;
   }
 
-  Student get studentID {
-    return _studentID;
+  Student get student {
+    return _student;
   }
 
-  Course get courseCode {
-    return _courseCode;
+  Course get course {
+    return _course;
   }
 
   DateTime get regDate {
@@ -29,12 +29,12 @@ class Registration {
     _regID = id;
   }
 
-  set studentID(Student student) {
-    _studentID = student;
+  set student(Student student) {
+    _student = student;
   }
 
-  set courseCode(Course course) {
-    _courseCode = course;
+  set course(Course course) {
+    _course = course;
   }
 
   set regDate(DateTime date) {
