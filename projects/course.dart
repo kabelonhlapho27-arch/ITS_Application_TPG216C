@@ -10,14 +10,34 @@ class Course
   Course(this._courseCode, this._courseName, this._durationInWeeks, this._level);
 
   // Getters
-  String get courseCode => _courseCode;
-  String get courseName => _courseName;
-  int get durationInWeeks => _durationInWeeks;
-  String get level => _level;
+  String get courseCode{
+    return _courseCode;
+  }
+
+  String get courseName {
+    return _courseName;
+  }
+  int get durationInWeeks {
+    return _durationInWeeks;
+  }
+  String get level {
+    return _level;
+  }
 
   // Setters
-  set courseCode(String value) => _courseCode = value;
-  set courseName(String value) => _courseName = value;
-  set durationInWeeks(int value) => _durationInWeeks = value;
-  set level(String value) => _level = value;
+  set courseCode(String courseCode) {
+    this._courseCode = courseCode;
+  }
+  
+  set courseName(String courseName) {
+    this._courseName = courseName;
+  }
+
+  set durationInWeeks(int durationInWeeks) {
+    this._durationInWeeks = durationInWeeks;
+  }
+
+  set leve(String level) {
+    this._level = level;
+  }
 }
