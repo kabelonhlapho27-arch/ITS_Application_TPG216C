@@ -71,9 +71,26 @@ void main(){
   }
 }
 
-
+addStudent(){}
+displayStudent(){}
+//find student by ID helper function to avoid code duplication in registerStudentForCourse and viewRegistrationsByStudent
+Student? findStudentById(String studentId) {
+  try {
+    return students.firstWhere((s) => s.studentID == studentId);
+  } catch (e) {
+    return null;
+  }
+}
 addCourse(){}
 displayCourse(){}
+//find course by code helper function to avoid code duplication in registerStudentForCourse and viewRegistrationsByCourse
+Course? findCourseByCode(String courseCode) {
+  try {
+    return courses.firstWhere((c) => c.courseCode == courseCode);
+  } catch (e) {
+    return null;
+  }
+}
 registerStudentForCourse(){}
 viewAllRegistrations(){}
 viewRegistrationsByStudent(){}
