@@ -324,7 +324,7 @@ void viewRegistrationsByCourse() {
     return;
   }
 
-   print('\nREGISTRATIONS FOR ${course.courseCode}- Dart Programming');
+   print('\nREGISTRATIONS FOR ${course.courseCode}- ${course.courseName}');
   print('\tStudent ID\tStudent Name\tRegistration Date');
   print(
     '------------------------------------------------------------',
