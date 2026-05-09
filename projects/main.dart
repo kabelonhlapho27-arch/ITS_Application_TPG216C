@@ -209,45 +209,53 @@ Course? findCourseByCode(String courseCode) {
 }
 
 void registerStudentForCourse() {
-  print('\n=========================================');
-  print('REGISTER STUDENT FOR COURSE');
-  print('=========================================');
-  stdout.write('Enter Student ID: ');
+ String choice = 'y';
 
-  String studentID = stdin.readLineSync()?.trim() ?? '';
+  while (choice.toLowerCase() == 'y') {
+    print('\n=========================================');
+    print('REGISTER STUDENT FOR COURSE');
+    print('=========================================');
+    stdout.write('Enter Student ID: ');
 
-  Student? student = findStudentById(studentID);
+    String studentID = stdin.readLineSync()?.trim() ?? '';
 
-  // Validate if the student actually exists before moving on
-  if (student == null) {
-    print('Error: Student not found. Please try again.');
-    return; // Stop the function here so it doesn't crash later
-  }
+    Student? student = findStudentById(studentID);
 
-  stdout.write('Enter Course Code: ');
-  String? courseCode = stdin.readLineSync()?.trim() ?? '';
+    // Validate if the student actually exists before moving on
+    if (student == null) {
+      print('Error: Student not found. Please try again.');
+      return; // Stop the function here so it doesn't crash later
+    }
 
-  Course? course = findCourseByCode(courseCode);
-  if (course == null) {
-    print('Error: Course does not exist.');
-    return;
-  }
-  stdout.write('Enter registration date (YYYY-MM-DD): ');
-  String? dateStr = stdin.readLineSync()?.trim();
-  DateTime? regDate;
-  try {
-    regDate = DateTime.parse(dateStr!);
-    if (regDate.isAfter(DateTime.now())) {
-      print('Error: Registration date cannot be in the future.');
+    stdout.write('Enter Course Code: ');
+    String? courseCode = stdin.readLineSync()?.trim() ?? '';
+
+    Course? course = findCourseByCode(courseCode);
+    if (course == null) {
+      print('Error: Course does not exist.');
       return;
     }
-  } catch (e) {
-    print('Invalid date format. Use YYYY-MM-DD.');
-    return;
-  }
+    stdout.write('Enter registration date (YYYY-MM-DD): ');
+    String? dateStr = stdin.readLineSync()?.trim();
+    DateTime? regDate;
+    try {
+      regDate = DateTime.parse(dateStr!);
+      if (regDate.isAfter(DateTime.now())) {
+        print('Error: Registration date cannot be in the future.');
+        return;
+      }
+    } catch (e) {
+      print('Invalid date format. Use YYYY-MM-DD.');
+      return;
+    }
 
-  String regID = 'REG${registrations.length + 1}';
-  registrations.add(Registration(regID, student, course, regDate));
+    String regID = 'REG${registrations.length + 1}';
+    registrations.add(Registration(regID, student, course, regDate));
+    print("Student registered for course successfully.");
+
+    print("Do you want to register another student for a course? (y/n)");
+    choice = stdin.readLineSync()!.trim();
+  } //end while
 }
 
 void viewAllRegistrations() {
