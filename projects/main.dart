@@ -257,14 +257,26 @@ void viewAllRegistrations() {
   }
 
   print('\nREGISTRATION LIST');
-  print('Reg ID\tStudent ID\tStudent Name\tCourse Code\tCourse Name');
   print(
-    '-------------------------------------------------------------------------',
+    'Reg ID'.padRight(10) +
+        'Student ID'.padRight(15) +
+        'Student Name'.padRight(25) +
+        'Course Code'.padRight(15) +
+        'Course Name',
   );
+  print(
+    '------------------------------------------------------------------------------------',
+  );
+
   for (var r in registrations) {
-    print(
-      '${r.regID}\t${r.student.studentID}\t\t${r.student.firstName} ${r.student.lastName}\t${r.course.courseCode}\t\t${r.course.courseName}',
-    );
+    String fullName = '${r.student.firstName} ${r.student.lastName}';
+
+    String regCol = r.regID.padRight(10);
+    String studentIdCol = r.student.studentID.padRight(15);
+    String nameCol = fullName.padRight(25);
+    String courseCodeCol = r.course.courseCode.padRight(15);
+
+    print('$regCol$studentIdCol$nameCol$courseCodeCol${r.course.courseName}');
   }
 }
 
@@ -319,7 +331,9 @@ void viewRegistrationsByCourse() {
 }
 saveAllData() {
   saveRegistrations();
+  print('\nAll system data saved successfully.');
 }
 loadAllData() {
   loadRegistrations();
+  print('\nAll system data saved successfully.');
 }
