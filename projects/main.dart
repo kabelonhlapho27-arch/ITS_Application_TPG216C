@@ -324,18 +324,21 @@ void viewRegistrationsByCourse() {
     return;
   }
 
-  print('\nREGISTRATIONS FOR ${course.courseCode}- Dart Programming');
-  print('\tCourse Code\tCourse Name\tRegistration Date');
+   print('\nREGISTRATIONS FOR ${course.courseCode}- Dart Programming');
+  print('\tStudent ID\tStudent Name\tRegistration Date');
   print(
     '------------------------------------------------------------',
   );
   for (var r in registrations) {
-    if (r.course == course) {
+    if (r.course.courseCode == course.courseCode) {
       print(
-        '${r.course.courseCode}\t\t${r.course.courseName}\t${r.regDate.toLocal().toString().split(' ')[0]}',
+        '${r.student.studentID}\t\t${r.student.firstName} ${r.student.lastName}\t${r.regDate.toLocal().toString().split(' ')[0]}',
       );
+    }else {
+      print('No registrations found for this course.');
     }
   }
+
 }
 saveAllData() {
   saveRegistrations();
