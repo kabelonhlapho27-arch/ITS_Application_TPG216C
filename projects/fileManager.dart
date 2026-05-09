@@ -5,59 +5,60 @@ import 'course.dart'; //Course Class
 import 'registration.dart'; //Registration Class
 import 'main.dart'; //main functions
 
-Future<void> saveRegistrations() async {
+void saveRegistrations() {
   try {
     var file = File('registrations.txt');
-
-    if (!await file.exists()) {
-      await file.create();
-      print('registrations.txt created successfully.');
-    } else {
-      print('registrations.txt already exists. Overwriting with current data.');
-    }
     var buffer = StringBuffer();
+
     for (var r in registrations) {
+      String formattedDate = r.regDate.toString().split(' ')[0];
+
       buffer.writeln(
-        '${r.regID},${r.student.studentID},${r.course.courseCode},${r.regDate.toIso8601String()}',
+        '${r.regID},${r.student.studentID},${r.course.courseCode},$formattedDate',
       );
     }
-    await file.writeAsString(buffer.toString());
-    print('Registrations saved to file.');
+
+    
+    file.writeAsStringSync(buffer.toString());
   } catch (e) {
     print('Error saving registrations: $e');
   }
 }
 
-Future<void> loadRegistrations() async {
+void loadRegistrations() {
+  // Clear existing list before loading to prevent duplicates
+  registrations.clear();
+
   var file = File('registrations.txt');
+
+  if (!file.existsSync()) {
+    print('No registrations file found. Starting with an empty list.');
+    return;
+  }
+
   try {
-    if (await file.exists()) {
-      List<String> lines = await file.readAsLines();
-      registrations
-          .clear(); // Clear existing registrations before loading new ones
-      for (var line in lines) {
-        if (line.trim().isEmpty) continue; // Skip empty lines
-        var parts = line.split(',');
-        if (parts.length == 4) {
-          String regID = parts[0];
-          String studentID = parts[1];
-          String courseCode = parts[2];
-          DateTime regDate = DateTime.parse(parts[3]);
+    List<String> lines = file.readAsLinesSync();
 
-          // Find the student and course
-          Student? student = findStudentById(studentID);
-          Course? course = findCourseByCode(courseCode);
+    for (var line in lines) {
+      if (line.trim().isEmpty) continue;
 
-          if (student != null && course != null) {
-            registrations.add(Registration(regID, student, course, regDate));
-          }
-        } else {
-          print('Invalid line format in registrations.txt: $line');
+      var parts = line.split(',');
+
+      if (parts.length >= 4) {
+        String regID = parts[0].trim();
+        String studentID = parts[1].trim();
+        String courseCode = parts[2].trim();
+        DateTime regDate = DateTime.parse(parts[3].trim());
+
+        Student? student = findStudentById(studentID);
+        Course? course = findCourseByCode(courseCode);
+
+        if (student != null && course != null) {
+          registrations.add(Registration(regID, student, course, regDate));
         }
+      } else {
+        print('Invalid line format in registrations.txt: $line');
       }
-      print('Registrations loaded from file.');
-    } else {
-      print('No registrations file found. Starting with an empty list.');
     }
   } catch (e) {
     print('Error loading registrations: $e');
