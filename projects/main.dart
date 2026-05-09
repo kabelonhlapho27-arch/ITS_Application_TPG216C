@@ -161,13 +161,13 @@ addCourse() {
 
   while (choice.toLowerCase() == 'y') {
     print("Enter course code: ");
-    String courseCode = stdin.readLineSync()!;
+    String courseCode = stdin.readLineSync()!.trim();
 
     print("Enter course name: ");
-    String courseName = stdin.readLineSync()!;
+    String courseName = stdin.readLineSync()!.trim();
 
     print("Enter duration in weeks: ");
-    int durationInWeeks = int.parse(stdin.readLineSync()!);
+    int durationInWeeks = int.parse(stdin.readLineSync()!.trim());
 
     print("Enter course level: ");
     String level = stdin.readLineSync()!.trim();
@@ -175,7 +175,7 @@ addCourse() {
     // Validation
     if (courseCode.isEmpty ||
         courseName.isEmpty ||
-        durationInWeeks < 0 ||
+        durationInWeeks <= 0 ||
         level.isEmpty) {
     
         print("All inputs required. Please try again.");
@@ -270,5 +270,9 @@ void viewAllRegistrations() {
 
 viewRegistrationsByStudent() {}
 viewRegistrationsByCourse() {}
-saveAllData() {}
-loadAllData() {}
+saveAllData() {
+  saveRegistrations();
+}
+loadAllData() {
+  loadRegistrations();
+}
