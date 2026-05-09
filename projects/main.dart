@@ -3,7 +3,7 @@ import 'dart:io';
 import 'student.dart'; //Student Class
 import 'course.dart'; //Course Class
 import 'registration.dart'; //Registration Class
-//import 'fileManager.dart'; //save/load functions
+import 'fileManager.dart'; //save/load functions
 
 //import 'utils.dart'
 
@@ -268,8 +268,55 @@ void viewAllRegistrations() {
   }
 }
 
-viewRegistrationsByStudent() {}
-viewRegistrationsByCourse() {}
+void viewRegistrationsByStudent() {
+  stdout.write('Enter Student ID: ');
+
+  String studentID = stdin.readLineSync()?.trim() ?? '';
+  Student? student = findStudentById(studentID);
+
+  if (student == null) {
+    print('Error: Student not found.');
+    return;
+  }
+
+  print('\nREGISTRATIONS FOR ${student.studentID}-${student.firstName} ${student.lastName}');
+  print('\tCourse Code\tCourse Name\tRegistration Date');
+  print(
+    '------------------------------------------------------------',
+  );
+  for (var r in registrations) {
+    if (r.student == student) {
+      print(
+        '${r.course.courseCode}\t\t${r.course.courseName}\t${r.regDate.toLocal().toString().split(' ')[0]}',
+      );
+    }
+  }
+}
+
+void viewRegistrationsByCourse() {
+  stdout.write('Enter Course Code: ');
+
+  String courseCode = stdin.readLineSync()?.trim() ?? '';
+  Course? course = findCourseByCode(courseCode);
+
+  if (course == null) {
+    print('Error: Course not found.');
+    return;
+  }
+
+  print('\nREGISTRATIONS FOR ${course.courseCode}- Dart Programming');
+  print('\tCourse Code\tCourse Name\tRegistration Date');
+  print(
+    '------------------------------------------------------------',
+  );
+  for (var r in registrations) {
+    if (r.course == course) {
+      print(
+        '${r.course.courseCode}\t\t${r.course.courseName}\t${r.regDate.toLocal().toString().split(' ')[0]}',
+      );
+    }
+  }
+}
 saveAllData() {
   saveRegistrations();
 }
