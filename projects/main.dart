@@ -198,7 +198,20 @@ addCourse() {
 
   }
 }
-displayCourse() {}
+displayCourse() {
+   if (courses.isEmpty) {
+    print("No courses found");
+  } else {
+    print("COURSE LIST");
+    print("---------------------------------------------------");
+    print("Code      Course Name              Duration   Level");
+    for (var nr in courses) {
+      print(
+        "${nr.courseCode}      ${nr.courseName}                ${nr.durationInWeeks} weeks    ${nr.level}",
+      );
+    }
+  }
+}
 //find course by code helper function to avoid code duplication in registerStudentForCourse and viewRegistrationsByCourse
 Course? findCourseByCode(String courseCode) {
   try {
