@@ -35,7 +35,7 @@ void loadStudents(){
       if(line.trim().isEmpty)continue;
 
       var parts = line.split(',');
-      if(parts.Length>=4){
+      if(parts.length>=4){
         String studentID = parts[0].trim();
         String firstName= parts[1].trim();
         String lastName= parts[2].trim();
