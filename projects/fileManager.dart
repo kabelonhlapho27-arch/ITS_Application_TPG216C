@@ -5,6 +5,50 @@ import 'course.dart'; //Course Class
 import 'registration.dart'; //Registration Class
 import 'main.dart'; //main functions
 
+void saveStudents(){
+  try{
+    var file=File('students.txt');
+    var buffer= StringBuffer();
+
+    for(var s in students){
+      buffer.writeln('${s.studentID},${s.firstName},${s.lastName},${s.cellphone}',);
+    }
+    file.writeAsStringSync(buffer.toString());
+  }catch(e){
+    print('Error saving students: $e');
+  }
+}
+
+void loadStudents(){
+  students.clear();
+
+  var file= File('students.txt');
+
+  if(!file.existsSync()){
+    print('No registrations file found. Starting with an empty list.');
+    return;
+  }
+  try{
+    List<String> lines=file.readAsLinesSync();
+
+    for(var line in lines){
+      if(line.trim().isEmpty)continue;
+
+      var parts = line.split(',');
+      if(parts.length>=4){
+        String studentID = parts[0].trim();
+        String firstName= parts[1].trim();
+        String lastName= parts[2].trim();
+        String cellphone= parts[3].trim();
+
+        students.add(Student(studentID,firstName,lastName,cellphone));
+      }
+    }
+  }catch(e){
+    print('Error loading students:$e');
+  }
+}
+
 void saveRegistrations() {
   try {
     var file = File('registrations.txt');
