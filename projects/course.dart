@@ -37,7 +37,7 @@ class Course
     this._durationInWeeks = durationInWeeks;
   }
 
-  set leve(String level) {
+  set Level(String level) {
     this._level = level;
   }
 }
