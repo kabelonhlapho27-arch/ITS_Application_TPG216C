@@ -5,6 +5,53 @@ import 'course.dart'; //Course Class
 import 'registration.dart'; //Registration Class
 import 'main.dart'; //main functions
 
+void saveCourses() {
+  try {
+    var file = File('courses.txt');
+    var buffer = StringBuffer();
+
+    for (var c in courses) {
+      // Format: Code, Name, Duration, Level
+      buffer.writeln('${c.courseCode},${c.courseName},${c.durationInWeeks},${c.level}',);
+    }
+
+    file.writeAsStringSync(buffer.toString());
+  } catch (e){
+    print('Error saving courses: $e');
+  }
+}
+
+void loadCourses() {
+  courses.clear();
+  var file = File('courses.txt');
+
+  if (!file.existsSync()) {
+    print('No courses file found.');
+    return;
+  }
+
+  try {
+    List<String> lines = file.readAsLinesSync();
+
+    for (var line in lines) {
+      if (line.trim().isEmpty) continue;
+
+      var parts = line.split(',');
+
+      if (parts.length >= 4) {
+        String code = parts[0].trim();
+        String name = parts[1].trim();
+        int duration = int.parse(parts[2].trim());
+        String level = parts[3].trim();
+
+        courses.add(Course(code, name, duration, level));
+      }
+    }
+  }catch (e) {
+    print('Error loading courses: $e');
+  }
+}
+
 void saveStudents(){
   try{
     var file=File('students.txt');
