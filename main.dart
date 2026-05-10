@@ -355,11 +355,13 @@ void viewRegistrationsByCourse() {
 }
 saveAllData() {
   saveCourses();
+  saveStudents();
   saveRegistrations();
   print('\nAll system data saved successfully.');
 }
 loadAllData() {
   loadCourses();
+  loadStudents();
   loadRegistrations();
   print('\nAll system data saved successfully.');
 }
