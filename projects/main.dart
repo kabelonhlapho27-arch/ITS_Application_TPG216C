@@ -354,6 +354,8 @@ void viewRegistrationsByCourse() {
 
 }
 saveAllData() {
+  saveCourses();
+  saveStudents();
   saveRegistrations();
   print('\nAll system data saved successfully.');
 }
